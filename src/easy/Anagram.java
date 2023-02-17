@@ -10,19 +10,17 @@ public class Anagram {
     public static boolean isAnagram(String s, String t) {
         if (s.length() != t.length()) return false;
         int[] hashTable = new int[26];
-
-        for (char x : s.toCharArray()){
-            hashTable[x - 97] += 1;
+        char[] ss = s.toCharArray();
+        char[] tt = t.toCharArray();
+        int i = 0, j = 0;
+        while (i < ss.length) {
+            hashTable[ss[i++] - 97] += 1;
+            hashTable[tt[j++] - 97] -= 1;
         }
-        for (char x : t.toCharArray()){
-            hashTable[x - 97] -= 1;
-        }
 
-        for (int i = 0; i < 26; ++i){
+        for (i = 0; i < 26; ++i){
             if (hashTable[i] != 0) return false;
         }
         return true;
-
-
     }
 }
